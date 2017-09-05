@@ -1,0 +1,18 @@
+
+language: php
+-5.6
+-7.0
+-7.1
+
+sudo: false
+
+before_install:
+  - composer self-update --stable -n
+
+install:
+  - composer install --prefer-dist --no-suggect -n -o
+
+script:
+  - ./vendor/bin/phpunit --coverage-text=build/cover.txt
+
+after_script:
