@@ -146,9 +146,7 @@ class Bayes
         // get a frequency count for each token in the text
         $frequencyTable = $self->frequencyTable($tokens);
 
-        /*
-          Update our vocabulary and our word frequency count for this category
-        */
+        // Update vocabulary and word frequency count for this category
         foreach($frequencyTable as $token => $frequencyInText) {
             // add this word to our vocabulary if not already existing
             if (!isset($self->vocabulary[$token])) {
@@ -157,10 +155,12 @@ class Bayes
             }
 
             // update the frequency information for this word in this category
-            if (!isset($self->wordFrequencyCount[$category][$token]))
+            if (!isset($self->wordFrequencyCount[$category][$token])) {
               $self->wordFrequencyCount[$category][$token] = $frequencyInText;
-            else
+            }
+            else {
               $self->wordFrequencyCount[$category][$token] += $frequencyInText;
+            }
 
             // update the count of all words we have seen mapped to this category
             $self->wordCount[$category] += $frequencyInText;
