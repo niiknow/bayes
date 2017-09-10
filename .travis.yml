@@ -10,7 +10,7 @@ before_install:
   - composer self-update --stable -n
 
 install:
-  - composer install --prefer-dist --no-suggect -n -o
+  - composer install --prefer-dist -n -o
 
 script:
   - ./vendor/bin/phpunit --coverage-text=build/cover.txt
