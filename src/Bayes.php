@@ -3,8 +3,7 @@
 namespace niiknow;
 
 /**
- * NaiveBayes classifier
- * ported from nodejs: https://github.com/ttezel/bayes
+ * Naive-Bayes Classifier
  */
 class Bayes
 {
@@ -17,7 +16,7 @@ class Bayes
     public $wordFrequencyCount;
     public $stopWords;
 
-    public $ser = [
+    public $STATE_KEYS = [
         'categories', 'docCount',
         'totalDocuments',
         'vocabulary', 'vocabularySize',
@@ -38,7 +37,18 @@ class Bayes
             $this->options = [];
         }
 
-        $this->tokenizer = new StringTokenizer();
+        // set default tokenizer
+        $this->tokenizer = function($text) {
+            // convert everything to lowercase
+            $text = strtolower($text);
+
+            // split the words
+            preg_match_all('/[[:alpha:]]+/u', $text, $matches);
+
+            // first match list of words
+            return $matches[0];
+        };
+
         if (isset($this->options['tokenizer'])) {
            $this->tokenizer = $this->options['tokenizer'];
         }
@@ -93,7 +103,7 @@ class Bayes
         $this->reset();
 
         // deserialize from json
-        foreach($this->ser as $k) {
+        foreach($this->STATE_KEYS as $k) {
             if (isset($result[$k])) {
                 $this->{$k} = $result[$k];
             }
@@ -110,7 +120,7 @@ class Bayes
         $result = [];
 
         // serialize to json
-        foreach($this->ser as $k) {
+        foreach($this->STATE_KEYS as $k) {
             $result[$k] = $this->{$k};
         }
 
@@ -152,7 +162,7 @@ class Bayes
         $self->totalDocuments++;
 
         // normalize the text into a word array
-        $tokens = $self->tokenizer->tokenize($text);
+        $tokens = ($self->tokenizer)($text);
 
         // get a frequency count for each token in the text
         $frequencyTable = $self->frequencyTable($tokens);
@@ -191,7 +201,7 @@ class Bayes
         $chosenCategory = null;
 
         if ($self->totalDocuments > 0) {
-            $tokens = $self->tokenizer->tokenize($text);
+            $tokens = ($self->tokenizer)($text);
             $frequencyTable = $self->frequencyTable($tokens);
 
             // iterate thru our categories to find the one with max probability for this text

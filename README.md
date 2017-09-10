@@ -1,8 +1,10 @@
 # `bayes`: A Naive-Bayes classifier for PHP
 `bayes` takes a document (piece of text), and tells you what category that document belongs to.
 
-This library was ported from the nodejs here: https://github.com/ttezel/bayes
-As we also keep the serialized object signature, you can simply use the learned/trained json output from either the PHP or nodejs library.
+This library was ported from a nodejs lib @ https://github.com/ttezel/bayes
+
+* Proven and popular classifier in nodejs - https://www.npmjs.com/package/bayes
+* We kept the json serialization signature so you can simply use the learned/trained json output from both PHP and nodejs library.
 
 ## What can I use this for?
 

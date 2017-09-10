@@ -2,12 +2,22 @@
   "name": "niiknow/bayes",
   "description": "a machine learning lib",
   "keywords": [
-    "template",
-    "composer",
+    "bayes",
     "lib",
     "library",
-    "package",
-    "niiknow"
+    "niiknow",
+    "naive-bayes-classifier",
+    "naive-bayes",
+    "naive-bayes-algorithm",
+    "naivebayes",
+    "naive",
+    "machine-learning",
+    "machine-learning-algorithm",
+    "classifier",
+    "php-ml",
+    "php",
+    "php-library",
+    "naive-bayes-classification"
   ],
   "license": "MIT",
   "authors": [{
