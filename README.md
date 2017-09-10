@@ -1,4 +1,6 @@
 # `bayes`: A Naive-Bayes classifier for PHP
+[![Build Status](https://travis-ci.org/niiknow/bayes.svg?branch=master)](https://travis-ci.org/niiknow/bayes)
+
 `bayes` takes a document (piece of text), and tells you what category that document belongs to.
 
 This library was ported from a nodejs lib @ https://github.com/ttezel/bayes
