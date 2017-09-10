@@ -28,7 +28,7 @@ class Bayes
     protected $options;
 
     /**
-     * initialize an instance of Bayes
+     * initialize an instance of a Naive-Bayes Classifier
      * @param array $options
      */
     public function __construct($options = null) {
@@ -87,7 +87,7 @@ class Bayes
         $result = $json;
         // deserialize from json
         if (is_string($json)) {
-            $result = json_decode($json);
+            $result = json_decode($json, true);
         }
 
         $this->reset();
@@ -114,9 +114,14 @@ class Bayes
             $result[$k] = $this->{$k};
         }
 
-        return json_encode($reuslt);
+        return json_encode($result);
     }
 
+    /**
+     * make sure the category exists in dictionary
+     * @param  string $categoryName
+     * @return Bayes
+     */
     public function initializeCategory($categoryName) {
         if (!isset($this->categories[$categoryName])) {
             $this->docCount[$categoryName] = 0;
@@ -128,6 +133,12 @@ class Bayes
         return $this;
     }
 
+    /**
+     * Teach your classifier
+     * @param  string $text
+     * @param  string $category
+     * @return Bayes
+     */
     public function learn($text, $category) {
         $self = $this;
 
@@ -169,6 +180,11 @@ class Bayes
         return $self;
     }
 
+    /**
+     * Identify the category of the provided text parameter.
+     * @param  string $text
+     * @return string       the category or null
+     */
     public function categorize($text) {
         $self = $this;
         $maxProbability = -INF;
@@ -200,6 +216,12 @@ class Bayes
         return $chosenCategory;
     }
 
+    /**
+     * calculate the probability that a `token` belongs to a `category`
+     * @param  string $token
+     * @param  string $category
+     * @return number           the probability
+     */
     public function tokenProbability($token, $category) {
         // how many times this word has occurred in documents mapped to this category
         $wordFrequencyCount = 0;
@@ -214,6 +236,14 @@ class Bayes
         return ( $wordFrequencyCount + 1 ) / ( $wordCount + $this->vocabularySize );
     }
 
+    /**
+     * Build a frequency hashmap where
+     *  - the keys are the entries in `tokens`
+     *  - the values are the frequency of each entry in `tokens`
+     *
+     * @param  array  $tokens array of string
+     * @return array         hashmap of token frequency
+     */
     public function frequencyTable($tokens) {
         $frequencyTable = [];
         // print(json_encode($tokens));
