@@ -45,7 +45,7 @@ $classifier->categorize('awesome, cool, amazing!! Yay.');
 $stateJson = $classifier->toJson();
 
 // load the classifier back from its JSON representation.
-$classifier.fromJson($stateJson);
+$classifier->fromJson($stateJson);
 
 ```
 
