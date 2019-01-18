@@ -19,7 +19,7 @@ You can use this for categorizing any text content into any arbitrary set of **c
 ## Installing
 
 ```
-composer install Niiknow/bayes
+composer install niiknow/bayes
 ```
 
 ## Usage
