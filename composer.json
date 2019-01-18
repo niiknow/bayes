@@ -33,7 +33,7 @@
   },
   "autoload": {
     "psr-4": {
-      "niiknow\\": "src/"
+      "Niiknow\\": "src/"
     }
   },
   "autoload-dev": {

@@ -1,6 +1,6 @@
 <?php
 namespace Tests;
-use niiknow\Bayes;
+use Niiknow\Bayes;
 
 class BayesTests extends \PHPUnit\Framework\TestCase
 {

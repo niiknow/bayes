@@ -19,13 +19,13 @@ You can use this for categorizing any text content into any arbitrary set of **c
 ## Installing
 
 ```
-composer install niiknow/bayes
+composer install Niiknow/bayes
 ```
 
 ## Usage
 
 ```php
-$classifier = new \niiknow\Bayes();
+$classifier = new \Niiknow\Bayes();
 
 // teach it positive phrases
 
@@ -51,7 +51,7 @@ $classifier->fromJson($stateJson);
 
 ## API
 
-### `$classifier = new \niiknow\Bayes([options])`
+### `$classifier = new \Niiknow\Bayes([options])`
 
 Returns an instance of a Naive-Bayes Classifier.
 

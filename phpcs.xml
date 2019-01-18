@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<ruleset name="Coding Standards">
+  <!--
+     The name attribute of the ruleset tag is displayed
+     when running PHP_CodeSniffer with the -v command line
+     argument. The description tag below is not displayed anywhere
+     except in this file, so it can contain information for
+     developers who may change this file in the future.
+  -->
+  <description>Coding Standards</description>
+
+  <!--
+  If no files or directories are specified on the command line
+  your custom standard can specify what files should be checked
+  instead.
+
+  Note that specifying any file or directory path
+  on the command line will ignore all file tags.
+  -->
+  <file>src</file>
+
+  <!--
+     You can hard-code ignore patterns directly into your
+     custom standard so you don't have to specify the
+     patterns on the command line.
+
+  -->
+  <exclude-pattern>*/tests/*</exclude-pattern>
+
+  <!--
+     You can hard-code command line values into your custom standard.
+     Note that this does not work for the command line values:
+     -v[v][v], -l, -d, -sniffs and -standard
+
+     The following tags are equivalent to the command line arguments:
+     -p
+  -->
+  <arg name="report" value="summary"/>
+  <arg name="colors"/>
+  <arg value="p"/>
+
+  <!--
+     You can hard-code custom php.ini settings into your custom standard.
+     The following tag sets the memory limit to 64M.
+  -->
+  <ini name="memory_limit" value="128M"/>
+
+  <!--
+     Include all sniffs in the PEAR standard. Note that the
+     path to the standard does not have to be specified as the
+     PEAR standard exists inside the PHP_CodeSniffer install
+     directory.
+  -->
+
+  <!-- PHP code MUST use only UTF-8 without BOM. -->
+  <!-- https://github.com/armydotmil/dvids-api-client/blob/master/phpcs.xml -->
+  <rule ref="Generic.Files.ByteOrderMark"/>
+
+  <!-- Check for duplicated class names -->
+  <rule ref="Generic.Classes.DuplicateClassName" />
+
+  <!-- Class constants MUST be declared in all upper case with underscore separators. -->
+  <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
+
+  <!-- Method names MUST be declared in camelCase(). -->
+  <rule ref="Generic.NamingConventions.CamelCapsFunctionName">
+    <properties>
+      <property name="strict" value="false"/>
+    </properties>
+  </rule>
+
+  <!-- All PHP files MUST use the Unix LF (linefeed) line ending. -->
+  <rule ref="Generic.Files.LineEndings">
+    <properties>
+      <property name="eolChar" value="\n"/>
+    </properties>
+  </rule>
+
+  <!-- All PHP files MUST end with a single blank line. -->
+  <rule ref="PSR2.Files.EndFileNewline" />
+
+  <!-- The closing ?> tag MUST be omitted from files containing only PHP. -->
+  <rule ref="Zend.Files.ClosingTag"/>
+  <!-- Code MUST use an indent of 4 spaces, and MUST NOT use tabs for indenting. -->
+  <rule ref="Generic.WhiteSpace.ScopeIndent">
+    <properties>
+      <property name="indent" value="4" />
+    </properties>
+  </rule>
+  <rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+  <rule ref="Generic.WhiteSpace.ScopeIndent"/>
+
+  <rule ref="Generic.ControlStructures.InlineControlStructure"/>
+  <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
+  <rule ref="Generic.Formatting.MultipleStatementAlignment"/>
+  <rule ref="Generic.Metrics.CyclomaticComplexity"/>
+  <rule ref="Generic.Metrics.NestingLevel"/>
+  <rule ref="Generic.PHP.DeprecatedFunctions"/>
+  <rule ref="Generic.PHP.DisallowShortOpenTag"/>
+  <rule ref="Generic.PHP.LowerCaseConstant"/>
+  <rule ref="Generic.PHP.NoSilencedErrors"/>
+  <rule ref="Generic.Strings.UnnecessaryStringConcat"/>
+  <rule ref="MySource.PHP.EvalObjectFactory"/>
+  <rule ref="MySource.PHP.GetRequestData"/>
+  <rule ref="MySource.PHP.AjaxNullComparison"/>
+  <rule ref="PSR2"/>
+</ruleset>
