@@ -208,6 +208,32 @@ class Bayes
         $chosenCategory = null;
 
         if ($self->totalDocuments > 0) {
+            $probabilities = $self->probabilities($text);
+
+            // iterate thru our categories to find the one with max probability
+            // for this text
+            foreach ($probabilities as $category => $logProbability) {
+                if ($logProbability > $maxProbability) {
+                    $maxProbability = $logProbability;
+                    $chosenCategory = $category;
+                }
+            }
+        }
+
+        return $chosenCategory;
+    }
+
+    /**
+     * Extract the probabilities for each known category
+     * @param  string $text
+     * @return array       probabilities by category or null
+     */
+    public function probabilities($text)
+    {
+        $self           = $this;
+        $probabilities  = [];
+
+        if ($self->totalDocuments > 0) {
             $tokens         = ($self->tokenizer)($text);
             $frequencyTable = $self->frequencyTable($tokens);
 
@@ -222,15 +248,12 @@ class Bayes
                     // determine the log of the P( w | c ) for this word
                     $logProbability += $frequencyInText * log($tokenProbability);
                 }
-
-                if ($logProbability > $maxProbability) {
-                    $maxProbability = $logProbability;
-                    $chosenCategory = $category;
-                }
+                 
+                $probabilities[$category] = $logProbability;
             }
         }
 
-        return $chosenCategory;
+        return $probabilities;
     }
 
     /**
