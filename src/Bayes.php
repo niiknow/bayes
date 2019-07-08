@@ -70,27 +70,6 @@ class Bayes
     {
         // set options object
         $this->options = $options;
-        if (!$this->options) {
-            $this->options = [];
-        }
-
-        // set default tokenizer
-        $this->tokenizer = function ($text) {
-            // convert everything to lowercase
-            $text = mb_strtolower($text);
-
-            // split the words
-            preg_match_all('/[[:alpha:]]+/u', $text, $matches);
-
-            // first match list of words
-
-            return $matches[0];
-        };
-
-        if (isset($this->options['tokenizer'])) {
-            $this->tokenizer = $this->options['tokenizer'];
-        }
-
         $this->reset();
     }
 
@@ -279,6 +258,27 @@ class Bayes
      */
     public function reset()
     {
+        if (!$this->options) {
+            $this->options = [];
+        }
+
+        // set default tokenizer
+        $this->tokenizer = function ($text) {
+            // convert everything to lowercase
+            $text = mb_strtolower($text);
+
+            // split the words
+            preg_match_all('/[[:alpha:]]+/u', $text, $matches);
+
+            // first match list of words
+
+            return $matches[0];
+        };
+
+        if (isset($this->options['tokenizer'])) {
+            $this->tokenizer = $this->options['tokenizer'];
+        }
+
         // add this word to our vocabulary if not already existing
         $this->categories = [];
 
