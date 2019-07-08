@@ -65,6 +65,10 @@ Teach your classifier what `category` the `text` belongs to. The more you teach 
 
 Returns the `category` it thinks `text` belongs to. Its judgement is based on what you have taught it with **.learn()**.
 
+### `$classifier->propabilities(text)`
+
+Extract the probabilities for each known category.
+
 ### `$classifier->toJson()`
 
 Returns the JSON representation of a classifier.
@@ -72,6 +76,34 @@ Returns the JSON representation of a classifier.
 ### `$classifier->fromJson(jsonStr)`
 
 Returns a classifier instance from the JSON representation. Use this with the JSON representation obtained from `$classifier->toJson()`
+
+## Stopwords
+
+You can pass in your own tokenizer function in the constructor.  Example:
+
+```
+// array containing stopwords
+$stopwords = array("der", "die", "das", "the");
+
+// escape the stopword array and implode with pipe
+$s = '~^\W*('.implode("|", array_map("preg_quote", $stopwords)).')\W+\b|\b\W+(?1)\W*$~i';
+
+$options['tokenizer'] = function($text) use ($s) {
+            // convert everything to lowercase
+            $text = mb_strtolower($text);
+
+            // remove stop words
+            $text = preg_replace($s, '', $text);
+
+            // split the words
+            preg_match_all('/[[:alpha:]]+/u', $text, $matches);
+
+            // first match list of words
+            return $matches[0];
+        };
+
+$classifier = new \niiknow\Bayes($options);
+```
 
 ## MIT
 
