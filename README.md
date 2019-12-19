@@ -65,7 +65,7 @@ Teach your classifier what `category` the `text` belongs to. The more you teach 
 
 Returns the `category` it thinks `text` belongs to. Its judgement is based on what you have taught it with **.learn()**.
 
-### `$classifier->propabilities(text)`
+### `$classifier->probabilities(text)`
 
 Extract the probabilities for each known category.
 
