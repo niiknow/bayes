@@ -55,7 +55,7 @@ $classifier->fromJson($stateJson);
 
 Returns an instance of a Naive-Bayes Classifier.
 
-Pass in an optional `options` object to configure the instance. If you specify a `tokenizer` of `iTokenizer` instance in `options`, it will be used as the instance's tokenizer.
+Pass in an optional `options` object to configure the instance. If you specify a `tokenizer` function in `options`, it will be used as the instance's tokenizer.
 
 ### `$classifier->learn(text, category)`
 

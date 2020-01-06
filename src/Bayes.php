@@ -17,46 +17,66 @@ class Bayes
     ];
 
     /**
+     * hashmap of our category names
+     *
      * @var array
      */
     public $categories;
 
     /**
+     * document frequency table for each of our categories
+     *  for each category, how often were documents mapped to it
+     *
      * @var number
      */
     public $docCount;
 
     /**
+     * number of documents we have learned from
+     *
      * @var number
      */
     public $totalDocuments;
 
     /**
+     * Vocabulary list
+     *
      * @var array
      */
     public $vocabulary;
 
     /**
+     * Vocabulary size
+     *
      * @var number
      */
     public $vocabularySize;
 
     /**
+     * for each category, how many words total were mapped to it
+     *
      * @var number
      */
     public $wordCount;
 
     /**
+     * word frequency table for each category
+     *  for each category, how frequent was a given word mapped to it
+     *
      * @var number
      */
     public $wordFrequencyCount;
 
     /**
+     * constructor options which include tokenizer
+     *
      * @var array
      */
     protected $options;
 
     /**
+     * the tokenizer function
+     *
      * @var function
      */
     protected $tokenizer;
@@ -112,7 +132,6 @@ class Bayes
     public function frequencyTable($tokens)
     {
         $frequencyTable = [];
-        // => for each category, how often were documents mapped to it
         foreach ($tokens as $token) {
             if (!isset($frequencyTable[$token])) {
                 $frequencyTable[$token] = 1;
@@ -279,25 +298,12 @@ class Bayes
             $this->tokenizer = $this->options['tokenizer'];
         }
 
-        // add this word to our vocabulary if not already existing
-        $this->categories = [];
-
-        // update the frequency information for this word in this category
-        // update the count of all words we have seen mapped to this category
-        $this->docCount = [];
-
-        // iterate thru our categories to find the one with max probability
-        $this->totalDocuments = 0;
-
-        // for this text
-        $this->vocabulary     = [];
-        $this->vocabularySize = 0;
-
-        // iterate thru our categories to find the one with max probability
-        $this->wordCount = [];
-
-        // for this text
-        // determine the log of the P( w | c ) for this word
+        $this->categories         = [];
+        $this->docCount           = [];
+        $this->totalDocuments     = 0;
+        $this->vocabulary         = [];
+        $this->vocabularySize     = 0;
+        $this->wordCount          = [];
         $this->wordFrequencyCount = [];
 
         return $this;
